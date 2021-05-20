@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uy.com.cmgp.api.test;
 import uy.com.cmgp.datos.ClienteDao;
 import uy.com.cmgp.dominio.Cliente;
 
@@ -31,9 +32,10 @@ public class ServletController extends HttpServlet {
             }
         } else {
             this.accionDefault(req, res);
+            
         }
     }
-    
+        
     private void eliminarCliente(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("idCliente"));
         ClienteDao cd = new ClienteDao();

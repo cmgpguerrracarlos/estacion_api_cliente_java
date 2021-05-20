@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package uy.com.cmgp.datos;
 
 import java.sql.Connection;
@@ -6,33 +11,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import uy.com.cmgp.dominio.Cliente;
+import uy.com.cmgp.dominio.*;
 
-public class ClienteDao {
+/**
+ *
+ * @author cmgp
+ */
+public class DaoClienteApi {
+    private static final String SQL_SELECT = "SELECT * FROM datos_java";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM datos_java WHERE id_cliente=?";
+    private static final String SQL_INSERT = "INSERT INTO datos_java VALUES (?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE datos_java SET nombre=?, apellido=?, email=?, telefono=?,saldo=? where id_cliente=?";
+    private static final String SQL_DELETE = "DELETE FROM datos_java WHERE id_cliente=?";
 
-    private static final String SQL_SELECT = "SELECT * FROM cliente";
-    private static final String SQL_SELECT_BY_ID = "SELECT * FROM cliente WHERE id_cliente=?";
-    private static final String SQL_INSERT = "INSERT INTO cliente (nombre,apellido,email,telefono,saldo) VALUES (?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE cliente SET nombre=?, apellido=?, email=?, telefono=?,saldo=? where id_cliente=?";
-    private static final String SQL_DELETE = "DELETE FROM cliente WHERE id_cliente=?";
-
-    public List<Cliente> listar() {
+    public List<ClienteApi> listar() {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Cliente> clientes = new ArrayList<>();
+        List<ClienteApi> clientes = new ArrayList<>();
         try {
             conn = Conexion.getConnection();            
             ps = conn.prepareStatement(SQL_SELECT);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setIdCliente(rs.getInt("id_cliente"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setApellido(rs.getString("apellido"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setSaldo(rs.getDouble("saldo"));
+                ClienteApi cliente = new ClienteApi();
+//                cliente.setIdCliente(rs.getInt("id_cliente"));
+//                cliente.setNombre(rs.getString("nombre"));
+//                cliente.setApellido(rs.getString("apellido"));
+//                cliente.setEmail(rs.getString("email"));
+//                cliente.setTelefono(rs.getString("telefono"));
+//                cliente.setSaldo(rs.getDouble("saldo"));
                 clientes.add(cliente);
             }
 
@@ -54,24 +62,24 @@ public class ClienteDao {
 
     }
 
-    public Cliente encontrar(int id) {
+    public ClienteApi encontrar(int id) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Cliente cliente = null;
+        ClienteApi cliente = null;
         try {
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(SQL_SELECT_BY_ID);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                cliente = new Cliente();
-                cliente.setIdCliente(rs.getInt("id_cliente"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setApellido(rs.getString("apellido"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setSaldo(rs.getDouble("saldo"));
+                cliente = new ClienteApi();
+//                cliente.setIdCliente(rs.getInt("id_cliente"));
+//                cliente.setNombre(rs.getString("nombre"));
+//                cliente.setApellido(rs.getString("apellido"));
+//                cliente.setEmail(rs.getString("email"));
+//                cliente.setTelefono(rs.getString("telefono"));
+//                cliente.setSaldo(rs.getDouble("saldo"));
             }
 
         } catch (SQLException ex) {
@@ -91,19 +99,23 @@ public class ClienteDao {
         return cliente;
     }
 
-    public int insertar(Cliente cliente) {
+    public int insertar(ClienteApi cliente) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rows = 0;
+        System.out.println(cliente);
         try {
             conn = ConexionEstacion.getConnection();
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setString(1, cliente.getNombre());
-            ps.setString(2, cliente.getApellido());
-            ps.setString(3, cliente.getEmail());
-            ps.setString(4, cliente.getTelefono());
-            ps.setDouble(5, cliente.getSaldo());
-
+            ps.setInt(1, cliente.getId_estacion());
+            ps.setString(2, cliente.getFecha());
+            ps.setString(3, cliente.getTemperatura());
+            ps.setString(4, cliente.getPresion());
+            ps.setInt(6, cliente.getDireccion());
+            ps.setString(5, cliente.getVelocidad());
+            ps.setInt(7, cliente.getSolar());
+            ps.setInt(8, cliente.getUv());
+            ps.setString(9, cliente.getHumedad());
             rows = ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -121,19 +133,19 @@ public class ClienteDao {
         return rows;
     }
 
-    public int actualizar(Cliente cliente) {
+    public int actualizar(ClienteApi cliente) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             ps = conn.prepareStatement(SQL_UPDATE);
-            ps.setString(1, cliente.getNombre());
-            ps.setString(2, cliente.getApellido());
-            ps.setString(3, cliente.getEmail());
-            ps.setString(4, cliente.getTelefono());
-            ps.setDouble(5, cliente.getSaldo());
-            ps.setDouble(6, cliente.getIdCliente());
+//            ps.setString(1, cliente.getNombre());
+//            ps.setString(2, cliente.getApellido());
+//            ps.setString(3, cliente.getEmail());
+//            ps.setString(4, cliente.getTelefono());
+//            ps.setDouble(5, cliente.getSaldo());
+//            ps.setDouble(6, cliente.getIdCliente());
             rows = ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -176,4 +188,5 @@ public class ClienteDao {
         }
         return rows;
     }
+
 }

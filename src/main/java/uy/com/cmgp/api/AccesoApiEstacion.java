@@ -7,14 +7,39 @@ import java.util.Map;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import uy.com.cmgp.datos.DaoClienteApi;
 import uy.com.cmgp.dominio.ClienteApi;
 
 public class AccesoApiEstacion {
-    
-       public static List<ClienteApi> getResultApi(){
+
+    public static void main(String[] args) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                DaoClienteApi dca = new DaoClienteApi();
+                while (true) {
+                    try {
+                        Thread.sleep(1000*60*60*2);
+                        List<ClienteApi> csa = AccesoApiEstacion.getResultApi();
+                        csa.forEach(ca -> {
+                            dca.insertar(ca);
+                            System.out.println(ca);
+                            
+                        });
+                        System.out.println("===============================");
+                    } catch (InterruptedException ie) {
+                        System.out.println("End round");
+                    }
+                }
+            }
+        };
+
+        t.start();
+    }
+
+    public static List<ClienteApi> getResultApi() {
         String url = "http://localhost/JAVAEE/estacion/";
         Client client = ClientBuilder.newClient();
-        System.out.println("begin..............");
         String result = client.target(url).request(APPLICATION_JSON).get(String.class);
         List<String> li = separar(result);
         List<ClienteApi> usuarios = new ArrayList<>();
@@ -59,5 +84,5 @@ public class AccesoApiEstacion {
             }
         }
         return li;
-    } 
+    }
 }
