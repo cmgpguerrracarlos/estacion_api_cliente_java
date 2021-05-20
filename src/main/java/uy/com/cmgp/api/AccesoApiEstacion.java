@@ -60,15 +60,20 @@ public class AccesoApiEstacion {
         }
 
         ca.setId_estacion(Integer.parseInt(map.get("id_estacion")));
-        String fechad = map.get("fecha").concat("\"");
-        ca.setFecha(fechad);
-        ca.setTemperatura(map.get("temperatura"));
-        ca.setPresion(map.get("presion"));
+        String fechad = map.get("fecha");
+        String temp = map.get("temperatura");
+        String pres = map.get("presion");
+        String vel = map.get("velocidad_viento");
+        String hum = map.get("humedad");
+    
+        ca.setFecha(fechad.substring(1, fechad.length()));
+        ca.setTemperatura(temp.substring(1, temp.length()-1));
+        ca.setPresion(pres.substring(1, pres.length()-1));
         ca.setDireccion(Integer.parseInt(map.get("direccion_viento")));
-        ca.setVelocidad(map.get("velocidad_viento"));
+        ca.setVelocidad(vel.substring(1, vel.length()-1));
         ca.setSolar(Integer.parseInt(map.get("radiacion_solar")));
         ca.setUv(Integer.parseInt(map.get("radiacion_uv")));
-        ca.setHumedad(map.get("humedad"));
+        ca.setHumedad(hum.substring(1, hum.length()-1));
         return ca;
     }
 

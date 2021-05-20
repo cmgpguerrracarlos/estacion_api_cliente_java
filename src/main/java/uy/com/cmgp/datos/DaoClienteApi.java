@@ -30,17 +30,20 @@ public class DaoClienteApi {
         ResultSet rs = null;
         List<ClienteApi> clientes = new ArrayList<>();
         try {
-            conn = Conexion.getConnection();            
+            conn = ConexionEstacion.getConnection();            
             ps = conn.prepareStatement(SQL_SELECT);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ClienteApi cliente = new ClienteApi();
-//                cliente.setIdCliente(rs.getInt("id_cliente"));
-//                cliente.setNombre(rs.getString("nombre"));
-//                cliente.setApellido(rs.getString("apellido"));
-//                cliente.setEmail(rs.getString("email"));
-//                cliente.setTelefono(rs.getString("telefono"));
-//                cliente.setSaldo(rs.getDouble("saldo"));
+                cliente.setId_estacion(rs.getInt("id_estacion"));
+                cliente.setFecha(rs.getString("fecha_hora"));
+                cliente.setTemperatura(rs.getString("temperatura"));
+                cliente.setPresion(rs.getString("presion"));
+                cliente.setDireccion(rs.getInt("direccion_viento"));
+                cliente.setVelocidad(rs.getString("velocidad_viento"));
+                cliente.setSolar(rs.getInt("radiacion_solar"));
+                cliente.setUv(rs.getInt("radiacion_uv"));
+                cliente.setHumedad(rs.getString("humedad"));
                 clientes.add(cliente);
             }
 
