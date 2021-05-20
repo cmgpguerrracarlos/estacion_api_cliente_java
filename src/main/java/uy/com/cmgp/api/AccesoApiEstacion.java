@@ -19,14 +19,14 @@ public class AccesoApiEstacion {
                 DaoClienteApi dca = new DaoClienteApi();
                 while (true) {
                     try {
-                        Thread.sleep(1000*60*60*2);
+                        
                         List<ClienteApi> csa = AccesoApiEstacion.getResultApi();
                         csa.forEach(ca -> {
                             dca.insertar(ca);
-                            System.out.println(ca);
-                            
+                            System.out.println(ca);                            
                         });
                         System.out.println("===============================");
+                        Thread.sleep(1000*60*60*2);
                     } catch (InterruptedException ie) {
                         System.out.println("End round");
                     }
