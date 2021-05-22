@@ -11,9 +11,11 @@ import uy.com.cmgp.datos.DaoClienteApi;
 import uy.com.cmgp.dominio.ClienteApi;
 
 public class AccesoApiEstacion {
-
-    public static void main(String[] args) {
-        Thread t = new Thread() {
+    private static Boolean apagado= true;
+//    
+    public static void startApp() {
+        if(apagado){
+            Thread t = new Thread() {
             @Override
             public void run() {
                 DaoClienteApi dca = new DaoClienteApi();
@@ -25,16 +27,19 @@ public class AccesoApiEstacion {
                             dca.insertar(ca);
                             System.out.println(ca);                            
                         });
-                        System.out.println("===============================");
-                        Thread.sleep(1000*60*60*2);
+                        System.out.println("========Ejecutando busqueda en api=============");
+//                        Thread.sleep(1000*60*60*2);
+                          Thread.sleep(1000*60*2);
                     } catch (InterruptedException ie) {
                         System.out.println("End round");
                     }
                 }
             }
-        };
+            };
+            apagado = false;
+            t.start();
+        }
 
-        t.start();
     }
 
     public static List<ClienteApi> getResultApi() {

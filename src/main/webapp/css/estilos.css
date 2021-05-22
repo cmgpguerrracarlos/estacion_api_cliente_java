@@ -1,0 +1,38 @@
+body{
+    display: flex;
+    align-items: center;
+    padding: 10px 50px;
+    flex-wrap: wrap;
+}
+
+table{
+    border: 1px solid black;
+    width: 300px;
+    margin-right: 20px;
+    
+}
+
+td{
+    padding: 5px 15px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+thead{
+    background-color: black;
+    color: wheat;
+}
+
+div{
+    background-color: bisque;
+    padding: 25px;
+    border: 1px solid black;
+}
+
+canvas{
+    width: 800px;
+}
+
+a{
+    margin-left: 40px;
+}

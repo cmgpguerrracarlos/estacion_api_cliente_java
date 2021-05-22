@@ -19,7 +19,7 @@ import uy.com.cmgp.dominio.*;
  */
 public class DaoClienteApi {
     private static final String SQL_SELECT = "SELECT * FROM datos_java";
-    private static final String SQL_SELECT_BY_ID = "SELECT * FROM datos_java WHERE id_cliente=?";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM datos_java WHERE id_estacion=? and fecha_hora=?";
     private static final String SQL_INSERT = "INSERT INTO datos_java VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE datos_java SET nombre=?, apellido=?, email=?, telefono=?,saldo=? where id_cliente=?";
     private static final String SQL_DELETE = "DELETE FROM datos_java WHERE id_cliente=?";
@@ -65,18 +65,21 @@ public class DaoClienteApi {
 
     }
 
-    public ClienteApi encontrar(int id) {
+    public Boolean encontrar(int id, String fecha) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         ClienteApi cliente = null;
+        Boolean resultado = false;
         try {
-            conn = Conexion.getConnection();
+            conn = ConexionEstacion.getConnection();
             ps = conn.prepareStatement(SQL_SELECT_BY_ID);
             ps.setInt(1, id);
+            ps.setString(2, fecha);
             rs = ps.executeQuery();
             while (rs.next()) {
                 cliente = new ClienteApi();
+                resultado = true;
 //                cliente.setIdCliente(rs.getInt("id_cliente"));
 //                cliente.setNombre(rs.getString("nombre"));
 //                cliente.setApellido(rs.getString("apellido"));
@@ -99,13 +102,14 @@ public class DaoClienteApi {
                Conexion.close(conn); 
             }
         }
-        return cliente;
+        return resultado;
     }
 
     public int insertar(ClienteApi cliente) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rows = 0;
+        if(!this.encontrar(cliente.getId_estacion(), cliente.getFecha())){
         System.out.println(cliente);
         try {
             conn = ConexionEstacion.getConnection();
@@ -133,9 +137,12 @@ public class DaoClienteApi {
                Conexion.close(conn); 
             }
         }
+        }
         return rows;
     }
 
+    
+    
     public int actualizar(ClienteApi cliente) {
         Connection conn = null;
         PreparedStatement ps = null;
