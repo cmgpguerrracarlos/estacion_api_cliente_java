@@ -7,30 +7,31 @@ body{
 
 table{
     border: 1px solid black;
-    width: 300px;
+    width: 1200px;
     margin-right: 20px;
     
 }
-
+/*
 td{
     padding: 5px 15px;
     border: 1px solid black;
     text-align: center;
-}
+}*/
 
-thead{
-    background-color: black;
-    color: wheat;
-}
 
-div{
+
+/*div{
     background-color: bisque;
     padding: 25px;
     border: 1px solid black;
-}
+}*/
 
-canvas{
-    width: 800px;
+.canvas{
+    width: 1100px;
+    margin: 20px;
+    background-color: bisque;
+    padding: 25px;
+    border: 1px solid black;
 }
 
 a{
