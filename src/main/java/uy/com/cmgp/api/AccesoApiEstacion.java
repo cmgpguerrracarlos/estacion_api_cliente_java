@@ -29,7 +29,8 @@ public class AccesoApiEstacion {
                         });
                         System.out.println("========Ejecutando busqueda en api=============");
 //                        Thread.sleep(1000*60*60*2);
-                          Thread.sleep(1000*60*2);
+                        System.out.println("Espera 2 min ............................");  
+                        Thread.sleep(1000*60*2);
                     } catch (InterruptedException ie) {
                         System.out.println("End round");
                     }

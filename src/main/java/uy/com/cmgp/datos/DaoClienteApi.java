@@ -18,7 +18,7 @@ import uy.com.cmgp.dominio.*;
  * @author cmgp
  */
 public class DaoClienteApi {
-    private static final String SQL_SELECT = "SELECT * FROM datos_java";
+    private static final String SQL_SELECT = "SELECT * FROM datos_java ORDER BY fecha_hora ASC LIMIT 70 ";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM datos_java WHERE id_estacion=? and fecha_hora=?";
     private static final String SQL_INSERT = "INSERT INTO datos_java VALUES (?,?,?,?,?,?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE datos_java SET nombre=?, apellido=?, email=?, telefono=?,saldo=? where id_cliente=?";
