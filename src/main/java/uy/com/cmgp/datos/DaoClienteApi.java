@@ -51,14 +51,14 @@ public class DaoClienteApi {
             ex.printStackTrace(System.out);
         } finally {
             if (rs != null) {
-                Conexion.close(rs);
+                ConexionEstacion.close(rs);
             }
             if(ps != null ){
-                Conexion.close(ps);
+                ConexionEstacion.close(ps);
             }
             
             if(conn != null){
-               Conexion.close(conn); 
+               ConexionEstacion.close(conn); 
             }
             return clientes;
         }
@@ -92,14 +92,14 @@ public class DaoClienteApi {
             ex.printStackTrace(System.out);
         } finally {
             if (rs != null) {
-                Conexion.close(rs);
+                ConexionEstacion.close(rs);
             }
             if(ps != null ){
-                Conexion.close(ps);
+                ConexionEstacion.close(ps);
             }
             
             if(conn != null){
-               Conexion.close(conn); 
+               ConexionEstacion.close(conn); 
             }
         }
         return resultado;
@@ -130,11 +130,11 @@ public class DaoClienteApi {
         } finally {
             
             if(ps != null ){
-                Conexion.close(ps);
+                ConexionEstacion.close(ps);
             }
             
             if(conn != null){
-               Conexion.close(conn); 
+               ConexionEstacion.close(conn); 
             }
         }
         }
@@ -148,7 +148,7 @@ public class DaoClienteApi {
         PreparedStatement ps = null;
         int rows = 0;
         try {
-            conn = Conexion.getConnection();
+            conn = ConexionEstacion.getConnection();
             ps = conn.prepareStatement(SQL_UPDATE);
 //            ps.setString(1, cliente.getNombre());
 //            ps.setString(2, cliente.getApellido());
@@ -163,11 +163,11 @@ public class DaoClienteApi {
         } finally {
             
             if(ps != null ){
-                Conexion.close(ps);
+                ConexionEstacion.close(ps);
             }
             
             if(conn != null){
-               Conexion.close(conn); 
+               ConexionEstacion.close(conn); 
             }
         }
         return rows;
@@ -178,7 +178,7 @@ public class DaoClienteApi {
         PreparedStatement ps = null;
         int rows = 0;
         try {
-            conn = Conexion.getConnection();
+            conn = ConexionEstacion.getConnection();
             ps = conn.prepareStatement(SQL_DELETE);
             ps.setDouble(1, id);
 
@@ -189,11 +189,11 @@ public class DaoClienteApi {
         } finally {
             
             if(ps != null ){
-                Conexion.close(ps);
+                ConexionEstacion.close(ps);
             }
             
             if(conn != null){
-               Conexion.close(conn); 
+               ConexionEstacion.close(conn); 
             }
         }
         return rows;

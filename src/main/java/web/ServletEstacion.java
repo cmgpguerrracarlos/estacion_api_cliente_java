@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uy.com.cmgp.api.AccesoApiEstacion;
-import uy.com.cmgp.datos.ClienteDao;
 import uy.com.cmgp.datos.DaoClienteApi;
-import uy.com.cmgp.dominio.Cliente;
 import uy.com.cmgp.dominio.ClienteApi;
 
 @WebServlet("/ServletEstacion")
